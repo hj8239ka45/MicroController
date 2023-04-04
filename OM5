@@ -1,0 +1,118 @@
+#include "ASA_Lib.h"
+#include <string.h>
+
+#define Display   0x0F
+#define shotdown  0x0c
+#define scanlimit 0x0b
+#define intensity 0x0a
+#define decode    0x09
+
+//initial setting
+void SPI_init(void){
+	//set the twist
+	DDRF |= (1<<4);
+	DDRB |= (1<<7)|(1<<6)|(1<<5);
+	PORTB |= (0<<7)|(0<<6)|(1<<5);
+	//spi pins on port b MOSI SCK,SS outputs
+	DDRB |= ((0<<3)|(1<<2)|(1<<1)|(1<<0));
+	// SPI   enable,   Master, f/16
+	SPCR |= ((1<<SPE)|(1<<MSTR)|(1<<SPR0));
+}
+
+//Transmit the data
+void SPI_Transmit(char cData){
+	SPDR = cData;
+	while(!(SPSR & (1<<SPIF)))
+     ;
+}
+//write the data to control MAX7219
+void MAX7219_wright(char data_register,char data){
+	PORTF=(1<<4);
+	SPI_Transmit(data_register);
+	SPI_Transmit(data);
+	PORTF=(0<<4);
+}
+
+int main() {
+	ASA_M128_set();
+	SPI_init();
+	printf("Start SPI community\n");
+
+	MAX7219_wright(shotdown,1);
+	_delay_us(50);
+	MAX7219_wright(Display,0);
+	_delay_us(50);
+	MAX7219_wright(decode,0);
+	_delay_us(50);
+	MAX7219_wright(scanlimit,7);
+	_delay_us(50);
+	MAX7219_wright(intensity,2);
+	_delay_us(50);
+
+	char one[8]={
+		8,24,40,8,8,8,127,0
+	};
+	char two[8]={
+		24,36,68,8,16,32,64,252
+	};
+	char three[8]={
+		0,62,2,2,62,2,2,62
+	};
+	char four[8]={
+		8,24,40,72,248,8,8,8
+	};
+	char five[8]={
+		126,64,88,100,66,2,4,56
+	};
+	char six[8]={
+		4,8,16,40,36,34,20,8
+	};
+	char seven[8]={
+		62,34,36,8,16,32,64,0
+	};
+	char eight[8]={
+		0,62,34,34,62,34,34,62
+	};
+	char nine[8]={
+		8,20,34,38,28,8,16,32
+	};
+
+	for(int i=1;i<=8;i++){
+		MAX7219_wright(i,one[i-1]);_delay_us(50);
+	}
+	_delay_ms(1000);
+	for(int i=1;i<=8;i++){
+		MAX7219_wright(i,two[i-1]);_delay_us(50);
+	}
+	_delay_ms(1000);
+	for(int i=1;i<=8;i++){
+		MAX7219_wright(i,three[i-1]);_delay_us(50);
+	}
+	_delay_ms(1000);
+	for(int i=1;i<=8;i++){
+		MAX7219_wright(i,four[i-1]);_delay_us(50);
+	}
+	_delay_ms(1000);
+	for(int i=1;i<=8;i++){
+		MAX7219_wright(i,five[i-1]);_delay_us(50);
+	}
+	_delay_ms(1000);
+	for(int i=1;i<=8;i++){
+		MAX7219_wright(i,six[i-1]);_delay_us(50);
+	}
+	_delay_ms(1000);
+	for(int i=1;i<=8;i++){
+		MAX7219_wright(i,seven[i-1]);_delay_us(50);
+	}
+	_delay_ms(1000);
+	for(int i=1;i<=8;i++){
+		MAX7219_wright(i,eight[i-1]);_delay_us(50);
+	}
+	_delay_ms(1000);
+	for(int i=1;i<=8;i++){
+		MAX7219_wright(i,nine[i-1]);_delay_us(50);
+	}
+	while(1){
+		printf("code");
+	}
+}

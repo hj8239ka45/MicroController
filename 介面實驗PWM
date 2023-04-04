@@ -1,0 +1,107 @@
+#include "ASA_Lib.h"
+ISR(TIMER2_OVF_vect){
+	
+}
+int main(){
+	int s,wi,fr,in;
+	ASA_M128_set();
+	printf("choose a PWM");//PWM 通道
+	scanf("%d",&s);
+	printf("width:");	   //波寬(除頻值)
+	scanf("%d",&wi);
+	printf("frenqency");   //頻率
+	scanf("%d",&fr);
+	printf("inverse");	   //正反向   正0 反1
+	scanf("%d",&in);
+	switch(s)
+	{
+		case 1:
+			printf("channel");	
+			scanf("%d",&s);	
+			TCCR1A|=(0<<WGM11)|(1<<WGM10); //設定模式 Fast-PWM 8-bit
+			TCCR1B|=(0<<WGM13)|(1<<WGM12);
+			switch(fr)
+			{
+				case 1:
+				TCCR1B|=(0<<CS12)|(0<<CS11)|(1<<CS12);//設定中斷頻率 clkI/O/1 (No prescaling)
+				break;
+				case 2:
+				TCCR1B|=(0<<CS12)|(1<<CS11)|(0<<CS12);//設定中斷頻率 clkI/O/8 (From prescaling)
+				break;
+				case 3:
+				TCCR1B|=(0<<CS12)|(1<<CS11)|(1<<CS12);//設定中斷頻率 clkI/O/64 (From prescaling)
+				break;
+				case 4:
+				TCCR1B|=(1<<CS12)|(0<<CS11)|(0<<CS12);//設定中斷頻率 clkI/O/256 (From prescaling)
+				break;
+				case 5:
+				TCCR1B|=(1<<CS12)|(0<<CS11)|(0<<CS12);//設定中斷頻率 clkI/O/1024 (From prescaling)
+				break;
+			}
+			switch(s)
+			{		
+				case 1:
+				DDRB|=(1<<5);		//PB5輸出
+				TCCR1C|=(1<<FOC1A);
+				if(in==1)			//反
+				{
+					TCCR1A|=(1<<COM1A1)|(1<<COM1A0);//inverting mode
+				}  
+				else				//正
+				{
+					TCCR1A|=(1<<COM1A1)|(0<<COM1A0);//non-inverting mode
+				}
+				OCR1A=wi;			//除頻值
+				TIMSK|=(1<<TOIE2);	//時間遮罩
+				TIFR|=(1<<TOV2);
+				sei();
+				break;
+				
+				case 2:
+				DDRB|=(1<<6);	   //PB6輸出
+				TCCR1C|=(1<<FOC1B);
+				if(in==1)			//反
+				{
+					TCCR1A|=(1<<COM1B1)|(1<<COM1B0);
+				}
+				else				//正
+				{
+					TCCR1A|=(1<<COM1B1)|(0<<COM1B0);	
+				}
+				OCR1B=wi;			//除頻值
+				TIMSK|=(1<<TOIE2);	//時間遮罩
+				TIFR|=(1<<TOV2);
+				sei();
+				break;
+				
+				case 3:
+				DDRB|=(1<<7);	   //PB7輸出
+				TCCR1C|=(1<<FOC1C);
+				if(in==1)			//反
+				{
+					TCCR1A|=(1<<COM1C1)|(1<<COM1C0);
+				}
+				else				//正
+				{
+					TCCR1A|=(1<<COM1C1)|(0<<COM1C0);	
+				}
+				OCR1C=wi;			//除頻值
+				TIMSK|=(1<<TOIE2);	//時間遮罩
+				TIFR|=(1<<TOV2);
+				sei();
+				break;
+			}
+			break;
+		case 2:
+			DDRB|=(1<<7);
+			TCCR2|=(1<<FOC2);
+			TCCR2|=(1<<WGM21)|(1<<WGM20);//設定模式 Fast-PWM 8-bit
+			TCCR2|=(1<<COM21)|(0<<COM20);
+			TCCR2|=(0<<CS22)|(1<<CS21)|(0<<CS20);
+			OCR2=200;
+			TIMSK|=(1<<TOIE2);
+			TIFR|=(1<<TOV2);
+			sei();
+		break;
+	}
+}

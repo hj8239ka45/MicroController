@@ -41,8 +41,8 @@ int main(){
 	printf("%x\n",TWSR & 0xF8);//Load SLA_W into TWDR Register.
 
 	TWDR = ( address << 1 ) & 0xFE;
-	TWCR = (1<<TWINT) |(1<<TWEN);//Wait for TWINT flag set.
-	while (!(TWCR & (1<<TWINT)));
+	TWCR = (1<<TWINT) |(1<<TWEN);
+	while (!(TWCR & (1<<TWINT)));//Wait for TWINT flag set.
 	if ((TWSR & 0xF8) !=TW_MT_SLA_ACK)ERROR();//Check value of TWI Status Register
 	printf("%x\n",TWSR & 0xF8);//Load DATA into TWDR Register
 
@@ -143,8 +143,8 @@ int main(){
 	printf("%x\n",TWSR & 0xF8);//Load SLA_W into TWDR Register.
 
 	TWDR = ( address << 1 ) & 0xFE;
-	TWCR = (1<<TWINT) |(1<<TWEN);//Wait for TWINT flag set.
-	while (!(TWCR & (1<<TWINT)));
+	TWCR = (1<<TWINT) |(1<<TWEN);
+	while (!(TWCR & (1<<TWINT)));//Wait for TWINT flag set.
 	if ((TWSR & 0xF8) !=TW_MT_SLA_ACK)ERROR();//Check value of TWI Status Register
 	printf("%x\n",TWSR & 0xF8);//Load DATA into TWDR Register
 
@@ -201,8 +201,8 @@ int main(){
 	printf("%x\n",TWSR & 0xF8);//Load SLA_W into TWDR Register.
 
 	TWDR = ( address << 1 ) & 0xFE;
-	TWCR = (1<<TWINT) |(1<<TWEN);//Wait for TWINT flag set.
-	while (!(TWCR & (1<<TWINT)));
+	TWCR = (1<<TWINT) |(1<<TWEN);
+	while (!(TWCR & (1<<TWINT)));//Wait for TWINT flag set.
 	if ((TWSR & 0xF8) !=TW_MT_SLA_ACK)ERROR();//Check value of TWI Status Register
 	printf("%x\n",TWSR & 0xF8);//Load DATA into TWDR Register
 
@@ -234,8 +234,8 @@ int main(){
 		printf("%x\n",TWSR & 0xF8);//Load SLA_W into TWDR Register.
 
 	TWDR = ( address << 1 ) & 0xFE;
-	TWCR = (1<<TWINT) |(1<<TWEN);//Wait for TWINT flag set.
-	while (!(TWCR & (1<<TWINT)));
+	TWCR = (1<<TWINT) |(1<<TWEN);
+	while (!(TWCR & (1<<TWINT)));//Wait for TWINT flag set.
 	if ((TWSR & 0xF8) !=TW_MT_SLA_ACK)ERROR();//Check value of TWI Status Register
 		printf("%x\n",TWSR & 0xF8);//Load DATA into TWDR Register
 
@@ -255,15 +255,15 @@ int main(){
 		//printf("%x\n",TWSR & 0xF8);//Load SLA_W into TWDR Register.
 
 		TWDR = ( address << 1 )|0x01;
-		TWCR = (1<<TWINT) |(1<<TWEN);//Wait for TWINT flag set.
-		while (!(TWCR & (1<<TWINT)));
+		TWCR = (1<<TWINT) |(1<<TWEN);
+		while (!(TWCR & (1<<TWINT)));//Wait for TWINT flag set.
 		if ((TWSR & 0xF8) !=TW_MR_SLA_ACK)ERROR();//Check value of TWI Status Register
 		//printf("%x\n",TWSR & 0xF8);//Load DATA into TWDR Register
 
 		int tmp[2]={0,0};
 		double temper=0;
-		TWCR = (1<<TWINT) |(1<<TWEN) |(1<<TWEA);//Wait for TWINT flag set.
-		while (!(TWCR & (1<<TWINT)));
+		TWCR = (1<<TWINT) |(1<<TWEN) |(1<<TWEA);
+		while (!(TWCR & (1<<TWINT)));//Wait for TWINT flag set.
 		printf("%x\n",TWSR & 0xF8);
 		if ((TWSR & 0xF8) !=TW_MR_DATA_ACK)ERROR();
 		tmp[0] = TWDR;	 //receive the answer
@@ -316,8 +316,8 @@ int main(){
 	printf("%x\n",TWSR & 0xF8);//Load SLA_W into TWDR Register.
 
 	TWDR = ( address << 1 ) & 0xFE;
-	TWCR = (1<<TWINT) |(1<<TWEN);//Wait for TWINT flag set.
-	while (!(TWCR & (1<<TWINT)));
+	TWCR = (1<<TWINT) |(1<<TWEN);
+	while (!(TWCR & (1<<TWINT)));//Wait for TWINT flag set.
 	if ((TWSR & 0xF8) !=TW_MT_SLA_ACK)ERROR();//Check value of TWI Status Register
 	printf("%x\n",TWSR & 0xF8);//Load DATA into TWDR Register
 
@@ -374,8 +374,8 @@ int main(){
 	printf("%x\n",TWSR & 0xF8);//Load SLA_W into TWDR Register.
 
 	TWDR = ( address << 1 ) & 0xFE;
-	TWCR = (1<<TWINT) |(1<<TWEN);//Wait for TWINT flag set.
-	while (!(TWCR & (1<<TWINT)));
+	TWCR = (1<<TWINT) |(1<<TWEN);
+	while (!(TWCR & (1<<TWINT)));//Wait for TWINT flag set.
 	if ((TWSR & 0xF8) !=TW_MT_SLA_ACK)ERROR();//Check value of TWI Status Register
 	printf("%x\n",TWSR & 0xF8);//Load DATA into TWDR Register
 
@@ -407,8 +407,8 @@ int main(){
 		printf("%x\n",TWSR & 0xF8);//Load SLA_W into TWDR Register.
 
 	TWDR = ( address << 1 ) & 0xFE;
-	TWCR = (1<<TWINT) |(1<<TWEN);//Wait for TWINT flag set.
-	while (!(TWCR & (1<<TWINT)));
+	TWCR = (1<<TWINT) |(1<<TWEN);
+	while (!(TWCR & (1<<TWINT)));//Wait for TWINT flag set.
 	if ((TWSR & 0xF8) !=TW_MT_SLA_ACK)ERROR();//Check value of TWI Status Register
 		printf("%x\n",TWSR & 0xF8);//Load DATA into TWDR Register
 
@@ -428,21 +428,21 @@ int main(){
 		//printf("%x\n",TWSR & 0xF8);//Load SLA_W into TWDR Register.
 
 		TWDR = ( address << 1 )|0x01;
-		TWCR = (1<<TWINT) |(1<<TWEN);//Wait for TWINT flag set.
-		while (!(TWCR & (1<<TWINT)));
+		TWCR = (1<<TWINT) |(1<<TWEN);
+		while (!(TWCR & (1<<TWINT)));//Wait for TWINT flag set.
 		if ((TWSR & 0xF8) !=TW_MR_SLA_ACK)ERROR();//Check value of TWI Status Register
 		//printf("%x\n",TWSR & 0xF8);//Load DATA into TWDR Register
 
 		int tmp[2]={0,0};
 		double temper=0;
-		TWCR = (1<<TWINT) |(1<<TWEN) |(1<<TWEA);//Wait for TWINT flag set.
-		while (!(TWCR & (1<<TWINT)));
+		TWCR = (1<<TWINT) |(1<<TWEN) |(1<<TWEA);
+		while (!(TWCR & (1<<TWINT)));//Wait for TWINT flag set.
 		printf("%x\n",TWSR & 0xF8);
 		if ((TWSR & 0xF8) !=TW_MR_DATA_ACK)ERROR();
 		tmp[0] = TWDR;	 //receive the answer
 
-		TWCR = (1<<TWINT) |(1<<TWEN);//Wait for TWINT flag set.
-		while (!(TWCR & (1<<TWINT)));
+		TWCR = (1<<TWINT) |(1<<TWEN);
+		while (!(TWCR & (1<<TWINT)));//Wait for TWINT flag set.
 		printf("%x\n",TWSR & 0xF8);
 		tmp[1] = TWDR;	 //receive the answer
 		TWCR = (1<<TWINT)|(1<<TWEN)|(1<<TWSTO);//STOP

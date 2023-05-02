@@ -47,17 +47,17 @@ I2C 訊息為：
 ![image](https://user-images.githubusercontent.com/39979565/235634796-adf107b4-905e-47ae-a324-9d04a6871aee.png)  
 
 以本實驗為例，使用的晶片為 TMP175:
-初始設定 Address 會根據元件接的電路以及 datasheet 來決定設定之 slave address 為何  
+1. 首先會先進行 start 告訴通訊系統開始傳輸 I2C 通訊
+2. 初始設定 Address 會根據元件接的電路以及 datasheet 來決定設定之 slave address 為何  
 ![image](https://user-images.githubusercontent.com/39979565/235640682-9e686e78-ecf9-4156-9915-3c6a7b73b1c8.png)
-![image](https://user-images.githubusercontent.com/39979565/235638521-130f4135-c6cd-4a61-858b-6659617d1db2.png)
-
-![image](https://user-images.githubusercontent.com/39979565/235640124-0c4fe185-9cac-4791-8bf3-5d77dcdb2710.png)
-
+![image](https://user-images.githubusercontent.com/39979565/235641259-c8f621a5-51f2-4658-bd81-2b05d852474f.png)  
+3. 傳完 address 後會選擇讀/寫模式  
+![image](https://user-images.githubusercontent.com/39979565/235640124-0c4fe185-9cac-4791-8bf3-5d77dcdb2710.png)  
+4. 在寫入模式下，可以設定元件的configuration，可根據資料選擇三種不同模式，分別為 one shot, compare mode, interrupt mode  
 ![image](https://user-images.githubusercontent.com/39979565/235640288-a4fd8d7f-8a46-4079-adda-5553c686ec1c.png)
-
-
-![image](https://user-images.githubusercontent.com/39979565/235639891-602cbaa1-5a6a-4f76-88d0-f4f69d6c7245.png)
-
+![image](https://user-images.githubusercontent.com/39979565/235639891-602cbaa1-5a6a-4f76-88d0-f4f69d6c7245.png)  
+5. 設定完成後，需傳輸 end 告訴通訊系統結束傳輸 I2C 通訊 (切換讀寫模式也需要先 end)
+6. 在讀取模式下，設定完讀取模式後直接 end，根據 slave address 進行讀取，由於資料由 2 Bytes 組成:
 ![image](https://user-images.githubusercontent.com/39979565/235640193-e23a2f60-9fe0-432f-b9a7-91d9c7773e9f.png)
 
 

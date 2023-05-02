@@ -25,7 +25,7 @@ SPI 工作模式及時序圖:
 ![image](https://user-images.githubusercontent.com/39979565/235606499-bf83d1bd-9191-4992-9b2f-2e8fdc08fad4.png)  
 實驗五先設定好 SPI 進行傳輸的各個腳位設定，使用Port F於傳送資料時進行 /ss 腳位觸發，透過對 Max7219 點矩陣輪循進行傳送矩陣資料。  
 傳送資料流程為: 1.致能晶片 2.傳送希望改變的暫存器位置編號 3.希望設定的資料 4.禁能晶片  
-![image](https://user-images.githubusercontent.com/39979565/235618388-ce3d5c13-bc1c-4c96-8eeb-598b80d3bcaa.png)
+![image](https://user-images.githubusercontent.com/39979565/235618388-ce3d5c13-bc1c-4c96-8eeb-598b80d3bcaa.png)  
 
 OM6實驗：
 ------- 

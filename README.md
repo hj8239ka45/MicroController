@@ -33,8 +33,27 @@ OM6實驗：
 I2C(Inter-Integrated Circuit), 是一種常用的串列通訊協定，用於在元件之間——特別是兩個或兩個以上不同電路之間建立通訊。  
 I2C 有利於設計人員在系統的眾多節點之間建立簡單、雙向、彈性的通訊。I2C僅使用兩條雙向線來發送和接收資訊，從而降低了複雜性。它還允許設計人員配置多個主節點系統IC之間的通訊。 I2C 對管理系統和電源的開發人員也很有利，讓他們能夠在盡可能短的時間內創建高品質的產品。  
 
-每個I2C件有兩條線路:  
+每個I2C件有兩條線路：  
 * SDA是供主元件和節點發送和接收數據的線路。  
 * SCL是承載時脈訊號的線路。SCL總是由 I2C 主元件產生。規範對時脈訊號的低相位和高相位有最短週期要求。
+![image](https://user-images.githubusercontent.com/39979565/235631568-9aae8126-acc3-4c55-8c6d-4b15e4ee4665.png)
 
 I2C 匯流排僅使用兩條雙向線路：每個元件的SDA和SCL用於簡單的IC間通訊。  
+I2C 訊息為：  
+![image](https://user-images.githubusercontent.com/39979565/235634796-adf107b4-905e-47ae-a324-9d04a6871aee.png)
+* 起始條件: 喚醒匯流排上的元件。SDA線從高位準切換到低位準，然後SCL線從高位準切換到低位準。
+* 位址幀包含7位元或10位元序列，具體取決於可用性（參見產品手冊）。主元件將其想要與之通訊的節點位址發送到其所連接的每個節點。然後，每個節點將主元件所發送的位址與其自己的位址進行比較。如果位址匹配，它便向主元件發送一個低電壓ACK位元。如果地址不匹配，則節點什麼也不做，SDA線保持高位準。
+* 位址幀的最後一位告知節點，主元件是想要將數據寫入其中還是從中接收數據。如果主元件希望將數據發送到節點，則讀⁄寫位處於低位準。如果主元件請求從節點得到數據，則該位元處於高位準。
+* 消息中的每一幀後面都跟隨一個應答⁄不應答位元。如果成功接收到一個位址幀或數據幀，則接收元件會向發件者返回一個ACK位元。
+![image](https://user-images.githubusercontent.com/39979565/235638521-130f4135-c6cd-4a61-858b-6659617d1db2.png)
+
+以本實驗為例，使用的晶片為 TMP175:
+
+![image](https://user-images.githubusercontent.com/39979565/235640124-0c4fe185-9cac-4791-8bf3-5d77dcdb2710.png)
+
+![image](https://user-images.githubusercontent.com/39979565/235640288-a4fd8d7f-8a46-4079-adda-5553c686ec1c.png)
+
+
+![image](https://user-images.githubusercontent.com/39979565/235639891-602cbaa1-5a6a-4f76-88d0-f4f69d6c7245.png)
+
+![image](https://user-images.githubusercontent.com/39979565/235640193-e23a2f60-9fe0-432f-b9a7-91d9c7773e9f.png)

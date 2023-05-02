@@ -1,4 +1,4 @@
-# MicroController
+MicroController
 課堂上的微控實驗及介面實驗  
 使用 ATMega128 晶片進行實驗，運用 C 語言針對晶片記憶體位置進行設定  
 OM4實驗：
